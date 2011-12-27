@@ -79,6 +79,16 @@ buster.testCase("AMD extension", {
 		},
 		"depends on tests from loader module" : function() {
 		    assert.match(data().content, /'foo-test', 'bar-test'/);
+		},
+		"dependencies are declares as function parameters" : function() {
+		    assert.match(data().content, /function\(.+, .+\)/);
+		},
+		"declares tests as resources": function(done) {
+		    rs().getReadOnly(function(err, res) {
+			assert.defined(res.resources["/foo-test.js"]);
+			assert.defined(res.resources["/bar-test.js"]);
+			done();
+		    });
 		}
 	    };
 	}),
