@@ -81,6 +81,18 @@ buster.testCase("AMD extension", {
 		    assert.match(data().content, /'foo-test', 'bar-test'/);
 		}
 	    };
+	}),
+	"group with decorated dependencies": withGroup({
+	    tests: ["foo-test.js", "bar-test.js"],
+	    dependencyDecorator: function(dep) {return "plugin!"+dep},
+	    rootPath: "."
+	}, function(group, rs, err, data, tests) {
+	    return {
+		"//depends on tests from loader module" : function() {
+		    assert.match(data().content, /'plugin!foo-test', 'plugin!bar-test'/);
+		}
+	    };
 	})
+
     }
 });
