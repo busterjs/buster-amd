@@ -76,6 +76,9 @@ buster.testCase("AMD extension", {
 	    return {
 		"removes tests from group" : function() {
 		     assert.equals(tests(), []);
+		},
+		"depends on tests from loader module" : function() {
+		    assert.match(data().content, /'foo-test.js', 'bar-test.js'/);
 		}
 	    };
 	})
