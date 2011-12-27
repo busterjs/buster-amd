@@ -78,7 +78,7 @@ buster.testCase("AMD extension", {
 		     assert.equals(tests(), []);
 		},
 		"depends on tests from loader module" : function() {
-		    assert.match(data().content, /'foo-test.js', 'bar-test.js'/);
+		    assert.match(data().content, /'foo-test', 'bar-test'/);
 		}
 	    };
 	})
