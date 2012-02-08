@@ -1,23 +1,26 @@
 {
     "name": "buster-amd",
-    "version": "0.1.0",
-    "description": "extension for testing AMD modules",
+    "version": "0.2.0",
+    "description": "Extension for testing AMD modules",
     "homepage": "http://busterjs.org/docs/buster-amd",
     "author": { "name": "Joakim Ohlrogge" },
     "contributors": [{
         "name": "Joakim Ohlrogge",
         "url": "http://johlrogge.wordpress.com"
+    }, {
+        "name": "Christian Johansen",
+        "url": "http://cjohansen.no"
     }],
     "main": "./lib/buster-amd",
-    "repository": "git://gitorious.org/buster/buster-amd",
+    "repository": "https://github.com/busterjs/buster-amd.git",
     "license": {
         "type": "BSD",
         "url": "http://gitorious.org/buster/buster-amd/blobs/master/LICENSE"
     },
     "dependencies": {
-        "buster-core": "~0.5"
+        "buster-core": ">=0.5.1"
     },
     "devDependencies": {
-        "buster": ""
+        "buster": "*"
     }
 }
