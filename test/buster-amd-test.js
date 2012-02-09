@@ -87,8 +87,8 @@ buster.testCase("AMD extension", {
 	"group with decorated dependencies": withGroup({
 	    tests: ["foo-test.js", "bar-test.js"],
 	    "buster-amd": {
-                dependencyDecorator: function (dep) {
-                    return "plugin!" + dep.replace(/^\//, "").replace(/\.js$/, "");
+                pathMapper: function (path) {
+                    return "plugin!" + path.replace(/^\//, "").replace(/\.js$/, "");
                 }
             }
 	}, function(group, rs, err, content, tests) {
