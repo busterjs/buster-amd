@@ -13,7 +13,7 @@ function withGroup(body, tests) {
     );
 
     instance.setUp = function (done) {
-        body.extensions = [{ name: "buster-amd", extension: amd }];
+        body.extensions = [amd];
 	group = c.create().addGroup("test", body, __dirname + "/fixtures");
 
         group.bundleFramework().resolve().then(function (resourceSet) {
