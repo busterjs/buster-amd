@@ -97,6 +97,21 @@ buster.testCase("AMD extension", {
 		    assert.match(content(), /'plugin!foo-test', 'plugin!bar-test'/);
 		}
 	    };
+	}),
+
+	"sources": withGroup({
+            sources: ["foo-test.js"],
+	    tests: ["bar-test.js"]
+	}, function(group, rs, err, content, tests) {
+	    return {
+		"are removed from load path" : function() {
+		    refute.match(rs().loadPath.paths(), "foo-test.js");
+		},
+
+		"does not remove resource" : function() {
+                    assert.defined(rs().get("/foo-test.js"));
+		}
+	    };
 	})
     }
 });
