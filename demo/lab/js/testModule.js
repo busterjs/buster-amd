@@ -1,3 +1,3 @@
-(define [], function() {
-    return {name: "module"}
-})
+define([], function() {
+    return { name: "module" };
+});
