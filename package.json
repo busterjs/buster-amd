@@ -18,7 +18,7 @@
         "url": "http://gitorious.org/buster/buster-amd/blobs/master/LICENSE"
     },
     "dependencies": {
-        "buster-core": ">=0.5.1"
+        "buster-core": ">=0.6.0"
     },
     "devDependencies": {
         "buster": "*"
