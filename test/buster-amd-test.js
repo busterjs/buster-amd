@@ -120,6 +120,38 @@ buster.testCase("AMD extension", {
                     assert.defined(rs().get("/foo-test.js"));
 		}
 	    };
-	})
+        }),
+
+        "preloadSources": withGroup({
+            sources: ["foo-test.js"],
+            tests: ["bar-test.js"],
+            "buster-amd": {
+                preloadSources: true
+            }
+        }, function(group, rs, err, content, tests) {
+            return {
+                "sources not removed from load path": function() {
+                    assert.equals(
+                        rs().loadPath.paths(),
+                        ["/foo-test.js", "/buster/load-all.js"]);
+                }
+            };
+        }),
+
+        "preloadTests": withGroup({
+            sources: ["foo-test.js"],
+            tests: ["bar-test.js"],
+            "buster-amd": {
+                preloadTests: true
+            }
+        }, function(group, rs, err, content, tests) {
+            return {
+                "tests not removed from load path": function() {
+                    assert.equals(
+                        rs().loadPath.paths(),
+                        ["/bar-test.js", "/buster/load-all.js"]);
+                }
+            };
+        })
     }
 });
