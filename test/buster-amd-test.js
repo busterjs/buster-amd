@@ -16,7 +16,7 @@ function withGroup(body, tests) {
         body.extensions = [amd];
 	group = c.create().addGroup("test", body, __dirname + "/fixtures");
 
-        group.bundleFramework().resolve().then(function (resourceSet) {
+        group.resolve().then(function (resourceSet) {
 	    rs = resourceSet;
             var paths = resourceSet.loadPath.paths();
 	    loadedTests = paths.filter(function (p) { return p.indexOf("/buster") !== 0; });
@@ -45,8 +45,8 @@ buster.testCase("AMD extension", {
 		    assert.match(content(), "buster.run();");
 		},
 
-		"loader module requires dependenceis": function() {
-		    assert.match(content(), /^require\(\[\]/);
+		"loader module requires dependencies": function() {
+		    assert.match(content(), /require\(\['buster'\]/);
 		},
 
 		"loader module is appended to load": function (done) {
@@ -55,6 +55,14 @@ buster.testCase("AMD extension", {
 			    return act.indexOf("/buster/load-all.js") >= 0;
 			});
 		    }));
+		},
+
+		"loader module defines buster as a module": function() {
+			assert.match(content(), /define\('buster',/);
+		},
+
+		"loader module declares buster as function parameter": function() {
+			assert.match(content(), /function\(buster\)/);
 		}
 	    };
 	}),
@@ -69,11 +77,11 @@ buster.testCase("AMD extension", {
 		},
 
 		"depends on tests from loader module" : function() {
-		    assert.match(content(), "'foo-test', 'bar-test'");
+		    assert.match(content(), "'buster', 'foo-test', 'bar-test'");
 		},
 
-		"dependencies are declares as function parameters" : function() {
-		    assert.match(content(), /function\(.+, .+\)/);
+		"dependencies are declared as function parameters" : function() {
+		    assert.match(content(), /function\(buster, .+, .+\)/);
 		},
 
 		"declares tests as resources": function () {
@@ -112,6 +120,38 @@ buster.testCase("AMD extension", {
                     assert.defined(rs().get("/foo-test.js"));
 		}
 	    };
-	})
+        }),
+
+        "preloadSources": withGroup({
+            sources: ["foo-test.js"],
+            tests: ["bar-test.js"],
+            "buster-amd": {
+                preloadSources: true
+            }
+        }, function(group, rs, err, content, tests) {
+            return {
+                "sources not removed from load path": function() {
+                    assert.equals(
+                        rs().loadPath.paths(),
+                        ["/foo-test.js", "/buster/load-all.js"]);
+                }
+            };
+        }),
+
+        "preloadTests": withGroup({
+            sources: ["foo-test.js"],
+            tests: ["bar-test.js"],
+            "buster-amd": {
+                preloadTests: true
+            }
+        }, function(group, rs, err, content, tests) {
+            return {
+                "tests not removed from load path": function() {
+                    assert.equals(
+                        rs().loadPath.paths(),
+                        ["/bar-test.js", "/buster/load-all.js"]);
+                }
+            };
+        })
     }
 });
