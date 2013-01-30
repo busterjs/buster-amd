@@ -14,7 +14,7 @@ function withGroup(body, tests) {
 
     instance.setUp = function (done) {
         body.extensions = [amd];
-	group = c.create().addGroup("test", body, __dirname + "/fixtures");
+	group = c.createConfiguration().addGroup("test", body, __dirname + "/fixtures");
 
         group.resolve().then(function (resourceSet) {
 	    rs = resourceSet;
