@@ -1,6 +1,6 @@
 var buster = require("buster");
 var amd = require("../lib/buster-amd");
-var c = require("../../buster-configuration");
+var c = require("buster-configuration");
 
 function withGroup(body, tests) {
     var group, rs, err, data, loadedTests;
@@ -14,7 +14,7 @@ function withGroup(body, tests) {
 
     instance.setUp = function (done) {
         body.extensions = [amd];
-	group = c.createConfiguration().addGroup("test", body, __dirname + "/fixtures");
+	group = c.create().addGroup("test", body, __dirname + "/fixtures");
 
         group.resolve().then(function (resourceSet) {
 	    rs = resourceSet;

@@ -21,6 +21,7 @@
         "buster-core": ">=0.6.0"
     },
     "devDependencies": {
-        "buster": "*"
+        "buster": "*", 
+        "buster-configuration": ">=0.5.2"
     }
 }
