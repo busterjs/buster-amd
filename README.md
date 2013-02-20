@@ -31,9 +31,9 @@ You also need to add the `buster-amd` extension to your configuration::
     };
 ```
 
-> You should list your tests and sources as normal. Your sources must be
-> specified in the configuration even if you will `require` them from
-> your tests, otherwise, Buster will not make them available on the test server.
+* **You should list your tests and sources as normal. Your sources must be
+  specified in the configuration even if you will `require` them from
+  your tests, otherwise, Buster will not make them available on the test server.**
 
 If you have any issues with paths for your required files, check the configuration section below.
 
@@ -107,10 +107,10 @@ If your tests live outside of that directory, you can fix that with a different 
 In this case, your AMD loader will load the files with the following path in the browser with
 the path `src/../test/my-test.js` which is equivalent to `test/my-test.js`
 
-> If you specify your own mapper and decide not to remove the file extension
-> make sure you understand how your loader deals with files with an extension.
-> require.js for instance will load them with an absolute path, not prefixing these
-> with a `baseUrl` option, but curl.js will treat these files as any other modules.
+* **If you specify your own mapper and decide not to remove the file extension
+  make sure you understand how your loader deals with files with an extension.
+  require.js for instance will load them with an absolute path, not prefixing these
+  with a `baseUrl` option, but curl.js will treat these files as any other modules.**
 
 Another example: use the following mapper for AMD loader plugins::
 
