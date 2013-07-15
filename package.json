@@ -21,6 +21,6 @@
         "buster-core": ">=0.6.0"
     },
     "devDependencies": {
-        "buster": "*"
+        "buster": "git://github.com/InterNations/buster.git#09deba47a819f3ad1f25909f34869e74c2b254f9"
     }
 }
