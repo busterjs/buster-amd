@@ -5,5 +5,5 @@ config["web-module"] = {
     sources: ["testModule.js"],
     tests: ["test/*test.js"],
     libs: ["require-jquery.js"],
-    extensions: [require("buster-amd")]
+    extensions: [require("../../lib/buster-amd")]
 };
