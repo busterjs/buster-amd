@@ -1,6 +1,6 @@
 {
   "name": "buster-amd",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Extension for testing AMD modules",
   "homepage": "http://busterjs.org/docs/buster-amd",
   "author": {
