@@ -1,5 +1,7 @@
 # buster-amd
 
+[![Build status](https://secure.travis-ci.org/busterjs/buster-amd.png?branch=master)](http://travis-ci.org/busterjs/buster-amd)
+
 A plugin for [BusterJS](http://busterjs.org) that allows you to use an AMD loader to test asynchronous modules. You must provide your own loader. By default, a loader that provides ``require(deps, callback)``
 is assumed. This will eventually be pluggable.
 
@@ -17,18 +19,18 @@ Load in your configuration file, specifying your loader and the required configu
 You also need to add the `buster-amd` extension to your configuration::
 
 ```javascript
-    var config = module.exports;
-    
-    config["Browser tests"] = {
-        rootPath: "../",
-        libs: [
-            "libs/require.js",
-            "requirejs-config.js"
-        ],
-        sources: ["src/**/*.js"],
-        tests: ["test/**/*.js"],
-        extensions: [require("buster-amd")]
-    };
+var config = module.exports;
+
+config["Browser tests"] = {
+    rootPath: "../",
+    libs: [
+        "libs/require.js",
+        "requirejs-config.js"
+    ],
+    sources: ["src/**/*.js"],
+    tests: ["test/**/*.js"],
+    extensions: [require("buster-amd")]
+};
 ```
 
 * **You should list your tests and sources as normal. Your sources must be
@@ -43,13 +45,13 @@ dependencies (i.e. your modules) and in the callback define specs/test cases
 as usual::
 
 ```javascript
-    define(['moduleToTest.js'], function(moduleToTest){
-        buster.testCase("A test case", {
-            "test the module": function(){
-                assert.isObject(moduleToTest);
-            }
-        });
+define(['moduleToTest.js'], function(moduleToTest){
+    buster.testCase("A test case", {
+        "test the module": function(){
+            assert.isObject(moduleToTest);
+        }
     });
+});
 ```
 
 
@@ -63,45 +65,45 @@ The default mapper converts `/test/my-test.js` to `test/my-test`, i.e. strips le
 slash and file suffix::
 
 ```javascript
-    function (path) {
-        return path.replace(/\.js$/, "").replace(/^\//, "");
-    }
+function (path) {
+    return path.replace(/\.js$/, "").replace(/^\//, "");
+}
 ```
 
 However, if your AMD loader specifies a `basePath` in its configuration the default mapper might cause you issues::
 
 ```javascript
-    require.config({
-      baseUrl: 'src/'
-    });
+require.config({
+  baseUrl: 'src/'
+});
 ```
 
 In this case, every module your loader attempts to load will be prefixed with this basePath::
 
 ```
-    src/test/my-test.js
+src/test/my-test.js
 ```
 
 You don't need to restructure your project to solve this issue.
 If your tests live outside of that directory, you can fix that with a different mapping function::
 
 ```javascript
-    config["Browser tests"] = {
-        rootPath: "../",
-        libs: [
-            "libs/require.js",
-            "requirejs-config.js"
-        ],
-        sources: ["src/**/*.js"],
-        tests: ["test/**/*.js"],
-        extensions: [require("buster-amd")],
-        "buster-amd": {
-            pathMapper: function (path) {
-              // prefix any path starting with a slash with ../
-              return path.replace(/\.js$/, "").replace(/^\//, "../");
-            }
+config["Browser tests"] = {
+    rootPath: "../",
+    libs: [
+        "libs/require.js",
+        "requirejs-config.js"
+    ],
+    sources: ["src/**/*.js"],
+    tests: ["test/**/*.js"],
+    extensions: [require("buster-amd")],
+    "buster-amd": {
+        pathMapper: function (path) {
+          // prefix any path starting with a slash with ../
+          return path.replace(/\.js$/, "").replace(/^\//, "../");
         }
-    };
+    }
+};
 ```
 
 In this case, your AMD loader will load the files with the following path in the browser with
@@ -115,19 +117,19 @@ the path `src/../test/my-test.js` which is equivalent to `test/my-test.js`
 Another example: use the following mapper for AMD loader plugins::
 
 ```javascript
-    var config = module.exports;
-    
-    config["Browser tests"] = {
-        rootPath: "../",
-        sources: ["src/**/*.js"],
-        tests: ["test/**/*.js"],
-        extensions: [require("buster-amd")],
-        "buster-amd": {
-            pathMapper: function (path) {
-                return "plugin!" + path.replace(/^\//, "").replace(/\.js$/, "");
-            }
+var config = module.exports;
+
+config["Browser tests"] = {
+    rootPath: "../",
+    sources: ["src/**/*.js"],
+    tests: ["test/**/*.js"],
+    extensions: [require("buster-amd")],
+    "buster-amd": {
+        pathMapper: function (path) {
+            return "plugin!" + path.replace(/^\//, "").replace(/\.js$/, "");
         }
-    };
+    }
+};
 ```
 
 ## Examples
