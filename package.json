@@ -23,7 +23,8 @@
     "url": "http://gitorious.org/buster/buster-amd/blobs/master/LICENSE"
   },
   "scripts": {
-    "test": "node node_modules/buster/bin/buster-test"
+    "test": "node node_modules/buster/bin/buster-test",
+    "test-debug": "node --debug-brk node_modules/buster/bin/buster-test"
   },
   "devDependencies": {
     "buster": "~0.7.6",
