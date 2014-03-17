@@ -20,7 +20,7 @@
   "repository": "https://github.com/busterjs/buster-amd.git",
   "license": {
     "type": "BSD",
-    "url": "http://gitorious.org/buster/buster-amd/blobs/master/LICENSE"
+    "url": "https://github.com/busterjs/buster-amd/blob/master/LICENSE"
   },
   "scripts": {
     "test": "node node_modules/buster/bin/buster-test",
