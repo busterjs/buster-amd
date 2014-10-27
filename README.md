@@ -22,6 +22,7 @@ You also need to add the `buster-amd` extension to your configuration::
 var config = module.exports;
 
 config["Browser tests"] = {
+    environment: "browser",
     rootPath: "../",
     libs: [
         "libs/require.js",
@@ -89,6 +90,7 @@ If your tests live outside of that directory, you can fix that with a different 
 
 ```javascript
 config["Browser tests"] = {
+    environment: "browser",
     rootPath: "../",
     libs: [
         "libs/require.js",
@@ -120,6 +122,7 @@ Another example: use the following mapper for AMD loader plugins::
 var config = module.exports;
 
 config["Browser tests"] = {
+    environment: "browser",
     rootPath: "../",
     sources: ["src/**/*.js"],
     tests: ["test/**/*.js"],
